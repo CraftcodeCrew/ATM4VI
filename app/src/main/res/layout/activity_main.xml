@@ -16,8 +16,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextureView
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:id="@+id/textureview"/>
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/textureview" />
 
 </android.support.constraint.ConstraintLayout>
