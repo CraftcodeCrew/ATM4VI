@@ -1,3 +1,18 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">ATM4VI</string>
+    <string name="insertCard">Kartenschlitz rechts</string>
+    <string name="buttonLinksL1">Oben links ist <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="buttonLinksR1">Oben rechts ist <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="buttonLinksL2">darunter <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="buttonLinksL3">darunter <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="buttonLinksR2">darunter <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="buttonLinksR3">darunter <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="buttonLinksR4">darunter <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
+    <string name="enterPin">PIN Eingabe verdeckt.</string>
+    <string name="wantedAmount">Jetzt gewünschten Betrag eingeben, danach bestätigen.</string>
+    <string name="takeMoney">Geld jetzt entnehmen.</string>
+
+
+
+
 </resources>
