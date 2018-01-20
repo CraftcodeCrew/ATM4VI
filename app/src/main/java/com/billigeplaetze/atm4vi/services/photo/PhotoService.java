@@ -18,8 +18,8 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
     private IPhotoTakenUseCase iPhotoTakenUseCase;
 
     @Override
-    public void startService(TextureView textureView, Context context, IPhotoTakenUseCase iPhotoTakenUseCase) {
-        this.iPhotoTakenUseCase =iPhotoTakenUseCase;
+    public void startService(TextureView textureView, Context context, IPhotoTakenUseCase photoTakenUseCase) {
+        this.iPhotoTakenUseCase =photoTakenUseCase;
         photoHelper = new PhotoHelper(textureView, context, this);
         Handler handler= new Handler();
         handler.postDelayed(new Runnable() {

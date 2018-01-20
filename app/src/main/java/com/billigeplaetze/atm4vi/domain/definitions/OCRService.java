@@ -1,5 +1,7 @@
 package com.billigeplaetze.atm4vi.domain.definitions;
 
+import com.billigeplaetze.atm4vi.services.ocr.pojo.ReceivedData;
+
 import java.io.InputStream;
 
 /**
@@ -8,5 +10,5 @@ import java.io.InputStream;
 
 public interface OCRService {
 
-    String receiveImageData(InputStream stream);
+    ReceivedData receiveImageData(InputStream stream);
 }

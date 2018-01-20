@@ -1,9 +1,7 @@
 package com.billigeplaetze.atm4vi.services.ocr;
 
-import android.os.AsyncTask;
-import android.util.Log;
-
 import com.billigeplaetze.atm4vi.domain.definitions.OCRService;
+import com.billigeplaetze.atm4vi.services.ocr.pojo.ReceivedData;
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.vision.VisionServiceClient;
 import com.microsoft.projectoxford.vision.VisionServiceRestClient;
@@ -21,32 +19,16 @@ import java.io.InputStream;
 public class OCRServiceImpl implements OCRService {
 
     @Override
-    public String receiveImageData(InputStream stream) {
+    public ReceivedData receiveImageData(InputStream stream) {
         VisionServiceClient client = new VisionServiceRestClient(ApiSecrets.apiKey,ApiSecrets.apiRoot);
 
         try {
             Gson gson = new Gson();
             OCR ocr = client.recognizeText(stream, LanguageCodes.German, true);
-            return gson.toJson(ocr);
+            return new Gson().fromJson(gson.toJson(ocr), ReceivedData.class);
         } catch (VisionServiceException | IOException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        }
-    }
-
-    public static class OCRBackgroundTask extends AsyncTask<InputStream, Void, String> {
-
-        @Override
-        protected String doInBackground(InputStream... inputStreams) {
-            OCRService ocrService = new OCRServiceImpl();
-            return ocrService.receiveImageData(inputStreams[0]);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            // TODO work
-            Log.d("Test",result);
-
         }
     }
 
