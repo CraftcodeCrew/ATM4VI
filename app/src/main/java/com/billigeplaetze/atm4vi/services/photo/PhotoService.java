@@ -1,19 +1,18 @@
-package com.billigeplaetze.atm4vi.Services;
+package com.billigeplaetze.atm4vi.services.photo;
 
 import android.content.Context;
 import android.os.Handler;
 import android.view.TextureView;
 
-import com.billigeplaetze.atm4vi.Domain.Definitions.IPhotoTakenUseCase;
+import com.billigeplaetze.atm4vi.domain.definitions.IPhotoTakenUseCase;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 /**
  * Created by dannynator on 20.01.18.
  */
 
-public class PhotoService implements com.billigeplaetze.atm4vi.Domain.Definitions.PhotoService, INextPhotoAvailabilityListener {
+public class PhotoService implements com.billigeplaetze.atm4vi.domain.definitions.PhotoService, INextPhotoAvailabilityListener {
 
     private PhotoHelper photoHelper;
     private IPhotoTakenUseCase iPhotoTakenUseCase;

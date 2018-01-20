@@ -1,4 +1,4 @@
-package com.billigeplaetze.atm4vi.Services;
+package com.billigeplaetze.atm4vi.services.photo;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

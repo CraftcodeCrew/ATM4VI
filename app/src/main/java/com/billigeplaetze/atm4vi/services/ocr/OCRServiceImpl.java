@@ -1,16 +1,13 @@
-package com.billigeplaetze.atm4vi.services;
+package com.billigeplaetze.atm4vi.services.ocr;
 
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.billigeplaetze.atm4vi.R;
-import com.billigeplaetze.atm4vi.domain.OCRService;
+import com.billigeplaetze.atm4vi.domain.definitions.OCRService;
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.vision.VisionServiceClient;
 import com.microsoft.projectoxford.vision.VisionServiceRestClient;
 import com.microsoft.projectoxford.vision.contract.LanguageCodes;
-import com.microsoft.projectoxford.vision.contract.Line;
 import com.microsoft.projectoxford.vision.contract.OCR;
 import com.microsoft.projectoxford.vision.rest.VisionServiceException;
 

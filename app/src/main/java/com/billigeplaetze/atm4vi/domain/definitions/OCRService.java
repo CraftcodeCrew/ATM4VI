@@ -1,4 +1,4 @@
-package com.billigeplaetze.atm4vi.domain;
+package com.billigeplaetze.atm4vi.domain.definitions;
 
 import java.io.InputStream;
 

@@ -1,7 +1,6 @@
-package com.billigeplaetze.atm4vi.Domain.Definitions;
+package com.billigeplaetze.atm4vi.domain.definitions;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 /**
  * Created by dannynator on 20.01.18.

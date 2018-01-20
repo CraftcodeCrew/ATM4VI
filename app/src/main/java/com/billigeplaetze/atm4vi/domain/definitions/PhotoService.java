@@ -1,4 +1,4 @@
-package com.billigeplaetze.atm4vi.Domain.Definitions;
+package com.billigeplaetze.atm4vi.domain.definitions;
 
 import android.content.Context;
 import android.view.TextureView;
