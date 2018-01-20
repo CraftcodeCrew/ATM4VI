@@ -49,3 +49,6 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
+
+# Custom
+app/src/main/java/com/billigeplaetze/atm4vi/services/ApiSecrets.java

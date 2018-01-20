@@ -1,7 +1,5 @@
 package com.billigeplaetze.atm4vi.domain;
 
-import com.google.gson.Gson;
-
 import java.io.InputStream;
 
 /**
