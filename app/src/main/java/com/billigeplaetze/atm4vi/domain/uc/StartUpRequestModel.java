@@ -14,10 +14,17 @@ public class StartUpRequestModel {
     private final TextureView textureView;
     private final Activity mainActivity;
 
-    public StartUpRequestModel(Context context, TextureView textureView, Activity mainActivity) {
+    public Context getAppContext() {
+        return appContext;
+    }
+
+    private final Context appContext;
+
+    public StartUpRequestModel(Context context, TextureView textureView, Activity mainActivity, Context appContext) {
         this.context = context;
         this.textureView = textureView;
         this.mainActivity = mainActivity;
+        this.appContext = appContext;
     }
 
     public Context getContext() {

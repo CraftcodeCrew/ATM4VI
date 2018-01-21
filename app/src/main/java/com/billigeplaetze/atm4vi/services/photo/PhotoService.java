@@ -3,6 +3,7 @@ package com.billigeplaetze.atm4vi.services.photo;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
@@ -30,7 +31,7 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
     private PhotoHelper photoHelper;
     private IPhotoTakenUseCase iPhotoTakenUseCase;
 
-    private int mInterval = 5000; // 2 seconds by default, can be changed later
+    private int mInterval = 3500; // 2 seconds by default, can be changed later
     private Handler mHandler;
 
     @Override
@@ -45,7 +46,8 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
         @Override
         public void run() {
             try {
-                photoHelper.getPicture(); //this function can change value of mInterval.
+               // photoHelper.getPicture(); //this function can change value of mInterval.
+                new DownloadFilesTask().execute(null, null, null);
             } finally {
                 // 100% guarantee that this always happens, even if
                 // your update method throws an exception
@@ -69,4 +71,14 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
     public void nextImageFaild(Exception ex) {
 
     }
+
+    private class DownloadFilesTask extends AsyncTask<Void, Void, Void> {
+        protected Void doInBackground(Void... urls) {
+            photoHelper.getPicture();
+            return null;
+        }
+    }
+
+
+
 }

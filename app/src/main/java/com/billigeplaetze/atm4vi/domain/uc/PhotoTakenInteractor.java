@@ -2,6 +2,7 @@ package com.billigeplaetze.atm4vi.domain.uc;
 
 import android.content.Context;
 
+import com.billigeplaetze.LoggerDirtySt;
 import com.billigeplaetze.atm4vi.domain.ScreenRecognizer;
 import com.billigeplaetze.atm4vi.domain.definitions.IScreenChangedListener;
 import com.billigeplaetze.atm4vi.domain.definitions.OCRService;
@@ -29,7 +30,7 @@ public class PhotoTakenInteractor implements IPhotoTakenUseCase {
     public void submitPhoto(InputStream photo) {
          ReceivedData receivedData = ocrService.receiveImageData(photo);
          ScreenRecognizer recognizer = new ScreenRecognizer(receivedData, listener);
-         ScreenRecognizer.appendLog("Screen Nr.:" + recognizer.recognize());
+         LoggerDirtySt.getInstance().appendLog("Screen Nr.:" + recognizer.recognize());
 
     }
 }

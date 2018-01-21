@@ -1,5 +1,6 @@
 package com.billigeplaetze.atm4vi.domain;
 
+import com.billigeplaetze.LoggerDirtySt;
 import com.billigeplaetze.atm4vi.domain.definitions.IScreenChangedListener;
 import com.billigeplaetze.atm4vi.domain.definitions.Screen;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.Line;
@@ -36,72 +37,53 @@ public class ScreenRecognizer {
                     for (Line l : r.getLines()) {
                         if (l.getWords() != null) {
                             for (Word w : l.getWords()){
-                                texts.add(w.getText());
+                                texts.add(w.getText().toLowerCase());
                             }
                         }
                     }
                 }
             }
         }
-        appendLog(texts.toString());
+        LoggerDirtySt.getInstance().appendLog(texts.toString());
         return texts;
     }
 
     public Screen recognize(){
-        if (texts.contains("Vorteile") || texts.contains("geben") && texts.contains("Karte") || texts.contains("insert") && texts.contains("your")) {
+
+        if (  listContainsWord("vorteile") ||  listContainsWord("geben") && listContainsWord("karte") || listContainsWord("insert") || listContainsWord("your")) {
             compareScreens(Screen.Welcome);
             return Screen.Welcome;
         }
-        if (texts.contains("Funktion") || texts.contains("Funktion") || texts.contains("Handy") || texts.contains("Einzahlung") || texts.contains("Kontostand")) {
+        else if (listContainsWord("funk") || listContainsWord("funktion") || listContainsWord("handy") || listContainsWord("einzah") || listContainsWord("kontostand")) {
             compareScreens(Screen.Functions);
             return Screen.Functions;
         }
-        if (texts.contains("Geheimzahl") && texts.contains("verdeckt") || texts.contains("Korrekturtaste") && texts.contains("Eingabe")) {
+        else if (listContainsWord("geheim") || listContainsWord("verdeckt") || listContainsWord( "korrektur") || listContainsWord("eingab")) {
             compareScreens(Screen.PIN);
             return Screen.PIN;
         }
-        if (texts.contains("gewünschten") && texts.contains("Betrag") || texts.contains("Auswahl") && texts.contains("bieten") || texts.contains("Scheinarten") && texts.contains("alternative")) {
+        else if (listContainsWord("gewünschten") || listContainsWord("betrag") || listContainsWord("auswahl") || listContainsWord("bieten") || listContainsWord("scheinarten") || listContainsWord("alternative")) {
             compareScreens(Screen.MoneyMoney);
             return Screen.MoneyMoney;
         }
         return Screen.Unknown;
     }
 
-    public static void appendLog(String text)
-    {
-        File logFile = new File("sdcard/log.file");
-        if (!logFile.exists())
-        {
-            try
-            {
-                logFile.createNewFile();
-            }
-            catch (IOException e)
-            {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+    private boolean listContainsWord( String word) {
+        boolean value = false;
+        for (String temp : texts) {
+            if(temp.contains(word)) {
+                value = true;
             }
         }
-        try
-        {
-            //BufferedWriter for performance, true to set append to file flag
-            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
-            buf.append(text);
-            buf.newLine();
-            buf.close();
-        }
-        catch (IOException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        return value;
     }
+
 
     private void compareScreens(Screen current) {
         if (!ScreenStatus.getInstance().getStatus().equals(current)) {
             ScreenStatus.getInstance().updateStatus(current);
             bob.onScreenChanged(current);
-
         }
     }
 }

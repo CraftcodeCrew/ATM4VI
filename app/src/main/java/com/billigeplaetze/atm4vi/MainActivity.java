@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.TextureView;
 
+import com.billigeplaetze.LoggerDirtySt;
 import com.billigeplaetze.atm4vi.domain.uc.IStartUpUseCase;
 import com.billigeplaetze.atm4vi.domain.uc.StartUpInteractor;
 import com.billigeplaetze.atm4vi.domain.uc.StartUpRequestModel;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        LoggerDirtySt.getInstance().setContext(getBaseContext());
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(this,
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             TextureView tv = (TextureView) findViewById(R.id.textureview);
             IStartUpUseCase startUpUseCase = new StartUpInteractor();
-            startUpUseCase.start(new StartUpRequestModel(this,tv,this));
+            startUpUseCase.start(new StartUpRequestModel(this,tv,this, getApplicationContext()));
         }
 
     }
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     TextureView tv = (TextureView) findViewById(R.id.textureview);
                     IStartUpUseCase startUpUseCase = new StartUpInteractor();
-                    startUpUseCase.start(new StartUpRequestModel(this,tv,this));
+                    startUpUseCase.start(new StartUpRequestModel(this,tv,this, getApplicationContext()));
                 }
                 return;
             }
@@ -76,5 +79,10 @@ public class MainActivity extends AppCompatActivity {
         InputStream is = new ByteArrayInputStream(stream.toByteArray());
 
         task.execute(is);*/
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

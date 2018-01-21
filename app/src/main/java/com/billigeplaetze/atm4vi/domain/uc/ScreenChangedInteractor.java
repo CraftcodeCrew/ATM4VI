@@ -2,6 +2,7 @@ package com.billigeplaetze.atm4vi.domain.uc;
 
 import android.content.Context;
 
+import com.billigeplaetze.LoggerDirtySt;
 import com.billigeplaetze.atm4vi.R;
 import com.billigeplaetze.atm4vi.domain.definitions.IScreenChangedListener;
 import com.billigeplaetze.atm4vi.domain.definitions.ITTSEngine;
@@ -24,6 +25,7 @@ public class ScreenChangedInteractor implements IScreenChangedListener {
 
     @Override
     public void onScreenChanged(Screen screen) {
+        LoggerDirtySt.getInstance().appendLog("BeforeSound:" + screen);
         switch (screen) {
             case PIN:
                 ittsEngine.readOut(context.getResources().getString(R.string.enterPin));

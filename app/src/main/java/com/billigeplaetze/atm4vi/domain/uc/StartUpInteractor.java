@@ -33,4 +33,5 @@ public class StartUpInteractor implements IStartUpUseCase {
         this.photoService = new com.billigeplaetze.atm4vi.services.photo.PhotoService();
         this.photoService.startService(requestModel.getTextureView(),requestModel.getContext(),photoTakenInteractor);
     }
+
 }
