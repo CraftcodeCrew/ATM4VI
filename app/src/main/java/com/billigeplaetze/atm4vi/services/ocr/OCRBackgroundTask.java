@@ -24,7 +24,8 @@ public class OCRBackgroundTask extends AsyncTask<InputStream, Void, ReceivedData
     @Override
     protected void onPostExecute(ReceivedData result) {
         // TODO work
+        
         ScreenRecognizer recognizer = new ScreenRecognizer(result);
-        recognizer.recognize();
+        Log.d("REC", "" + recognizer.recognize());
     }
 }

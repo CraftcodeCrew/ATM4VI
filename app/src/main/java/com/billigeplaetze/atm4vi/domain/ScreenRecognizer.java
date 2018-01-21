@@ -39,7 +39,19 @@ public class ScreenRecognizer {
     }
 
     public int recognize(){
-        // TODO
-        return 0;
-    };
+        if (texts.contains("geben") && texts.contains("Karte") || texts.contains("insert") && texts.contains("card")) {
+            return 1;
+        }
+        if (texts.contains("Funktion") && (texts.contains("Auszahlung") || texts.contains("Einzahlung") || texts.contains("Kontostand"))) {
+            return 2;
+        }
+        if (texts.contains("Geheimzahl") && texts.contains("verdeckt") || texts.contains("Korrekturtaste") && texts.contains("Eingabe")) {
+            return 3;
+        }
+        if (texts.contains("anderer") && texts.contains("Betrag") || texts.contains("Scheinarten") && texts.contains("alternative")) {
+            return 4;
+        }
+            return -1;
+    }
+
 }

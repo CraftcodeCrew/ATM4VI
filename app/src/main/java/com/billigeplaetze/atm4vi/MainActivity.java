@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         // TODO Remove this
-       /* Drawable drawable = getResources().getDrawable(R.drawable.atm1);
+        Drawable drawable = getResources().getDrawable(R.drawable.atm4);
         BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
         Bitmap bitmap  = bitmapDrawable.getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -34,6 +34,6 @@ public class MainActivity extends AppCompatActivity {
         InputStream is = new ByteArrayInputStream(stream.toByteArray());
 
         OCRBackgroundTask task = new OCRBackgroundTask();
-        task.execute(is);*/
+        task.execute(is);
     }
 }
