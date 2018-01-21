@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         InputStream is = new ByteArrayInputStream(stream.toByteArray());
 
-        OCRBackgroundTask task = new OCRBackgroundTask();
         task.execute(is);*/
     }
 }
