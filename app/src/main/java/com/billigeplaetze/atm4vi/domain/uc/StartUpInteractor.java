@@ -17,7 +17,7 @@ public class StartUpInteractor implements IStartUpUseCase {
     @Override
     public void start(StartUpRequestModel requestModel) {
         this.ocrService = new OCRServiceImpl();
-        this.photoTakenInteractor = new PhotoTakenInteractor(ocrService);
+        this.photoTakenInteractor = new PhotoTakenInteractor(ocrService, requestModel.getContext());
         startServices(requestModel);
     }
 

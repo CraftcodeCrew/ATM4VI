@@ -34,11 +34,6 @@ public class Region {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("boundingBox", boundingBox).append("lines", lines).toString();
-    }
-
-    @Override
     public int hashCode() {
         return new HashCodeBuilder().append(boundingBox).append(lines).toHashCode();
     }

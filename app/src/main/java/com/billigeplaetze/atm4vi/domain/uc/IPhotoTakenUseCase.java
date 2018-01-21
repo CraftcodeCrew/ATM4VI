@@ -1,6 +1,6 @@
 package com.billigeplaetze.atm4vi.domain.uc;
 
-import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /**
  * Created by dannynator on 20.01.18.
@@ -8,6 +8,6 @@ import java.io.ByteArrayInputStream;
 
 public interface IPhotoTakenUseCase {
 
-    void submitPhoto(ByteArrayInputStream photo);
+    void submitPhoto(InputStream photo);
 
 }

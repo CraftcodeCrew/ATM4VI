@@ -33,11 +33,6 @@ public class Word {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("boundingBox", boundingBox).append("text", text).toString();
-    }
-
-    @Override
     public int hashCode() {
         return new HashCodeBuilder().append(text).append(boundingBox).toHashCode();
     }

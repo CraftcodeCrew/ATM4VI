@@ -1,11 +1,12 @@
 package com.billigeplaetze.atm4vi.domain.uc;
 
-import android.util.Log;
+import android.content.Context;
 
+import com.billigeplaetze.atm4vi.domain.ScreenRecognizer;
 import com.billigeplaetze.atm4vi.domain.definitions.OCRService;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.ReceivedData;
 
-import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /**
  * Created by dannynator on 21.01.18.
@@ -13,13 +14,18 @@ import java.io.ByteArrayInputStream;
 
 public class PhotoTakenInteractor implements IPhotoTakenUseCase {
     private final OCRService ocrService;
-
-    public PhotoTakenInteractor(OCRService ocrService) {
+    private final Context context;
+    public PhotoTakenInteractor(OCRService ocrService, Context context) {
         this.ocrService = ocrService;
+        this.context = context;
     }
 
     @Override
-    public void submitPhoto(ByteArrayInputStream photo) {
-        ReceivedData receivedData = ocrService.receiveImageData(photo);
+    public void submitPhoto(InputStream photo) {
+         ReceivedData receivedData = ocrService.receiveImageData(photo);
+         ScreenRecognizer recognizer = new ScreenRecognizer(receivedData, bob);
+         ScreenRecognizer.appendLog("Screen Nr.:" + recognizer.recognize());
+
     }
 }
+

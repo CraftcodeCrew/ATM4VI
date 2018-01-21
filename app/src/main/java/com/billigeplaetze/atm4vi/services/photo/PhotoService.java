@@ -1,12 +1,25 @@
 package com.billigeplaetze.atm4vi.services.photo;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.TextureView;
 
 import com.billigeplaetze.atm4vi.domain.uc.IPhotoTakenUseCase;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by dannynator on 20.01.18.
@@ -17,7 +30,7 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
     private PhotoHelper photoHelper;
     private IPhotoTakenUseCase iPhotoTakenUseCase;
 
-    private int mInterval = 2000; // 2 seconds by default, can be changed later
+    private int mInterval = 5000; // 2 seconds by default, can be changed later
     private Handler mHandler;
 
     @Override
@@ -43,8 +56,13 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
 
     @Override
     public void nextImage(byte[] image) {
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(image);
-        iPhotoTakenUseCase.submitPhoto(inputStream);
+        Bitmap bmp = BitmapFactory.decodeByteArray(image, 0, image.length);
+        Bitmap mutableBitmap = bmp.copy(Bitmap.Config.ARGB_8888, true);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        mutableBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        InputStream is = new ByteArrayInputStream(stream.toByteArray());
+
+        iPhotoTakenUseCase.submitPhoto(is);
     }
 
     @Override

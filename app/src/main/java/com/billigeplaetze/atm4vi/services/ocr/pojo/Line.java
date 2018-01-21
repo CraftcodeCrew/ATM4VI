@@ -34,11 +34,6 @@ public class Line {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("boundingBox", boundingBox).append("words", words).toString();
-    }
-
-    @Override
     public int hashCode() {
         return new HashCodeBuilder().append(boundingBox).append(words).toHashCode();
     }

@@ -56,11 +56,6 @@ public class ReceivedData {
     }
 
     @Override
-    public String toString() {
-        return new ToStringBuilder(this).append("language", language).append("textAngle", textAngle).append("orientation", orientation).append("regions", regions).toString();
-    }
-
-    @Override
     public int hashCode() {
         return new HashCodeBuilder().append(orientation).append(textAngle).append(language).append(regions).toHashCode();
     }

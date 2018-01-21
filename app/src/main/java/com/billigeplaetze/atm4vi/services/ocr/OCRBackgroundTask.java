@@ -1,7 +1,6 @@
 package com.billigeplaetze.atm4vi.services.ocr;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.billigeplaetze.atm4vi.domain.ScreenRecognizer;
 import com.billigeplaetze.atm4vi.domain.definitions.OCRService;
@@ -24,8 +23,8 @@ public class OCRBackgroundTask extends AsyncTask<InputStream, Void, ReceivedData
     @Override
     protected void onPostExecute(ReceivedData result) {
         // TODO work
-        
-        ScreenRecognizer recognizer = new ScreenRecognizer(result);
-        Log.d("REC", "" + recognizer.recognize());
+
+        ScreenRecognizer recognizer = new ScreenRecognizer(result, bob);
+        ScreenRecognizer.appendLog("Screen Nr.:" + recognizer.recognize());
     }
 }

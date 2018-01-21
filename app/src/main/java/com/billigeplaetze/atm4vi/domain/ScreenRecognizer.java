@@ -1,10 +1,16 @@
 package com.billigeplaetze.atm4vi.domain;
 
+import com.billigeplaetze.atm4vi.domain.definitions.IScreenChangedListener;
+import com.billigeplaetze.atm4vi.domain.definitions.Screen;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.Line;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.ReceivedData;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.Region;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.Word;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +20,10 @@ import java.util.List;
 
 public class ScreenRecognizer {
     private final List<String> texts;
-    public ScreenRecognizer(ReceivedData receivedData) {
+    private final IScreenChangedListener bob;
+    public ScreenRecognizer(ReceivedData receivedData, IScreenChangedListener bob) {
          texts = makeText(receivedData);
+        this.bob = bob;
     }
 
     public static List<String> makeText(ReceivedData receivedData){
@@ -35,23 +43,54 @@ public class ScreenRecognizer {
                 }
             }
         }
+        appendLog(texts.toString());
         return texts;
     }
 
-    public int recognize(){
+    public Screen recognize(){
         if (texts.contains("geben") && texts.contains("Karte") || texts.contains("insert") && texts.contains("card")) {
-            return 1;
+            return Screen.Welcome;
         }
         if (texts.contains("Funktion") && (texts.contains("Auszahlung") || texts.contains("Einzahlung") || texts.contains("Kontostand"))) {
-            return 2;
+            return Screen.Functions;
         }
         if (texts.contains("Geheimzahl") && texts.contains("verdeckt") || texts.contains("Korrekturtaste") && texts.contains("Eingabe")) {
-            return 3;
+            return Screen.PIN;
         }
         if (texts.contains("anderer") && texts.contains("Betrag") || texts.contains("Scheinarten") && texts.contains("alternative")) {
-            return 4;
+            return Screen.MoneyMoney;
         }
-            return -1;
+        return Screen.Unknown;
+    }
+
+    public static void appendLog(String text)
+    {
+        File logFile = new File("sdcard/log.file");
+        if (!logFile.exists())
+        {
+            try
+            {
+                logFile.createNewFile();
+            }
+            catch (IOException e)
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        try
+        {
+            //BufferedWriter for performance, true to set append to file flag
+            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+            buf.append(text);
+            buf.newLine();
+            buf.close();
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
