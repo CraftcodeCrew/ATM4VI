@@ -1,13 +1,27 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">ATM4VI</string>
     <string name="insertCard">Kartenschlitz rechts</string>
-    <string name="buttonLinksL1">Oben links ist <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
-    <string name="buttonLinksR1">Oben rechts ist <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
-    <string name="buttonDown">darunter <xliff:g id="function" example="kontostand">%s</xliff:g> </string>
-    <string name="enterPin">PIN Eingabe verdeckt.</string>
+    <string name="functionsScreen">Funktion auswählen</string>
+    <string name="buttonL1">Oben links ist Handy Aufladen </string>
+    <string name="buttonL2">Kontostand lesen, linke Seite, zweiter Knopf von Oben </string>
+    <string name="buttonL3">Geldkarte oder girokonto </string>
+    <string name="buttonL4">Auf Englisch wechseln</string>
+    <string name="buttonR1">Auszahlung, rechte Seite, erster Knopf von Oben</string>
+    <string name="buttonR2">Einzahlung</string>
+    <string name="buttonR3">Wunsch-PIN</string>
+    <string name="buttonR4">Funktionen im Kontoverbund</string>
+    <string name="buttonDown"> darunter </string>
+    <string name="enterPin">PIN Eingabe</string>
     <string name="wantedAmount">Jetzt gewünschten Betrag eingeben, danach bestätigen.</string>
     <string name="takeMoney">Geld jetzt entnehmen.</string>
 
+    <string name="buttonML1">50 Euro </string>
+    <string name="buttonML2">100 Euro </string>
+    <string name="buttonML3">150 Euro </string>
+    <string name="buttonML4">200 Euro </string>
+    <string name="buttonMR1">250 Euro </string>
+    <string name="buttonMR2">300 Euro </string>
+    <string name="buttonMR3">400 Euro </string>
 
 
 
