@@ -1,4 +1,4 @@
-package com.billigeplaetze.atm4vi.domain.definitions;
+package com.billigeplaetze.atm4vi.domain.uc;
 
 import java.io.ByteArrayInputStream;
 
