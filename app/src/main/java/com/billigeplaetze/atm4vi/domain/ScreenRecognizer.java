@@ -65,8 +65,15 @@ public class ScreenRecognizer {
         else if (listContainsWord("gewünschten") || listContainsWord("betrag") || listContainsWord("auswahl") || listContainsWord("bieten") || listContainsWord("scheinarten") || listContainsWord("alternative")) {
             compareScreens(Screen.MoneyMoney);
             return Screen.MoneyMoney;
+        } else if(listContainsWord("entneh") && listContainsWord("kart")) {
+            compareScreens(Screen.Card);
+            return Screen.Card;
+        } else if (listContainsWord("entneh") && listContainsWord("geld")){
+            compareScreens(Screen.TakeMoney);
+            return Screen.TakeMoney;
+        } else {
+            return Screen.Unknown;
         }
-        return Screen.Unknown;
     }
 
     private boolean listContainsWord( String word) {

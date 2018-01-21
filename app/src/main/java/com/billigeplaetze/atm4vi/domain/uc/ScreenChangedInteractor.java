@@ -50,6 +50,10 @@ public class ScreenChangedInteractor implements IScreenChangedListener {
                 moneyTakin += context.getResources().getString(R.string.buttonDown) + context.getResources().getString(R.string.buttonMR3);
                 ittsEngine.readOut(moneyTakin);
                 break;
+            case Card:
+                break;
+            case TakeMoney:
+                break;
             default:
                 ittsEngine.readOut("Kein Geldautomat erkannt");
                 break;
