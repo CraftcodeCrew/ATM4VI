@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.view.TextureView;
 
-import com.billigeplaetze.atm4vi.domain.definitions.IPhotoTakenUseCase;
+import com.billigeplaetze.atm4vi.domain.uc.IPhotoTakenUseCase;
 
 import java.io.ByteArrayInputStream;
 
@@ -17,18 +17,29 @@ public class PhotoService implements com.billigeplaetze.atm4vi.domain.definition
     private PhotoHelper photoHelper;
     private IPhotoTakenUseCase iPhotoTakenUseCase;
 
+    private int mInterval = 2000; // 2 seconds by default, can be changed later
+    private Handler mHandler;
+
     @Override
     public void startService(TextureView textureView, Context context, IPhotoTakenUseCase photoTakenUseCase) {
         this.iPhotoTakenUseCase =photoTakenUseCase;
         photoHelper = new PhotoHelper(textureView, context, this);
-        Handler handler= new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                photoHelper.getPicture();
-            }
-        },2000);
+        mHandler = new Handler();
+        mPhotoRunnable.run();
     }
+
+    Runnable mPhotoRunnable = new Runnable() {
+        @Override
+        public void run() {
+            try {
+                photoHelper.getPicture(); //this function can change value of mInterval.
+            } finally {
+                // 100% guarantee that this always happens, even if
+                // your update method throws an exception
+                mHandler.postDelayed(mPhotoRunnable, mInterval);
+            }
+        }
+    };
 
     @Override
     public void nextImage(byte[] image) {
