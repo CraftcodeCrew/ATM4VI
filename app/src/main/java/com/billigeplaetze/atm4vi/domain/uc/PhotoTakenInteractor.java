@@ -3,7 +3,9 @@ package com.billigeplaetze.atm4vi.domain.uc;
 import android.content.Context;
 
 import com.billigeplaetze.atm4vi.domain.ScreenRecognizer;
+import com.billigeplaetze.atm4vi.domain.definitions.IScreenChangedListener;
 import com.billigeplaetze.atm4vi.domain.definitions.OCRService;
+import com.billigeplaetze.atm4vi.domain.definitions.Screen;
 import com.billigeplaetze.atm4vi.services.ocr.pojo.ReceivedData;
 
 import java.io.InputStream;
@@ -23,7 +25,12 @@ public class PhotoTakenInteractor implements IPhotoTakenUseCase {
     @Override
     public void submitPhoto(InputStream photo) {
          ReceivedData receivedData = ocrService.receiveImageData(photo);
-         ScreenRecognizer recognizer = new ScreenRecognizer(receivedData, bob);
+         ScreenRecognizer recognizer = new ScreenRecognizer(receivedData, new IScreenChangedListener() {
+             @Override
+             public void onScreenChanged(Screen screen) {
+                 ScreenRecognizer.appendLog("Changed Screens to: " + screen);
+             }
+         });
          ScreenRecognizer.appendLog("Screen Nr.:" + recognizer.recognize());
 
     }

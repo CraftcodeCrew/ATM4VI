@@ -48,16 +48,20 @@ public class ScreenRecognizer {
     }
 
     public Screen recognize(){
-        if (texts.contains("geben") && texts.contains("Karte") || texts.contains("insert") && texts.contains("card")) {
+        if (texts.contains("Vorteile") || texts.contains("geben") && texts.contains("Karte") || texts.contains("insert") && texts.contains("your")) {
+            compareScreens(Screen.Welcome);
             return Screen.Welcome;
         }
-        if (texts.contains("Funktion") && (texts.contains("Auszahlung") || texts.contains("Einzahlung") || texts.contains("Kontostand"))) {
+        if (texts.contains("Funktion") || texts.contains("Funktion") || texts.contains("Handy") || texts.contains("Einzahlung") || texts.contains("Kontostand")) {
+            compareScreens(Screen.Functions);
             return Screen.Functions;
         }
         if (texts.contains("Geheimzahl") && texts.contains("verdeckt") || texts.contains("Korrekturtaste") && texts.contains("Eingabe")) {
+            compareScreens(Screen.PIN);
             return Screen.PIN;
         }
-        if (texts.contains("anderer") && texts.contains("Betrag") || texts.contains("Scheinarten") && texts.contains("alternative")) {
+        if (texts.contains("gewünschten") && texts.contains("Betrag") || texts.contains("Auswahl") && texts.contains("bieten") || texts.contains("Scheinarten") && texts.contains("alternative")) {
+            compareScreens(Screen.MoneyMoney);
             return Screen.MoneyMoney;
         }
         return Screen.Unknown;
@@ -93,4 +97,11 @@ public class ScreenRecognizer {
         }
     }
 
+    private void compareScreens(Screen current) {
+        if (!ScreenStatus.getInstance().getStatus().equals(current)) {
+            ScreenStatus.getInstance().updateStatus(current);
+            bob.onScreenChanged(current);
+
+        }
+    }
 }
