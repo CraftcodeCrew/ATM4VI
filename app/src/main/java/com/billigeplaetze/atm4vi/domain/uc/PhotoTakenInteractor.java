@@ -17,20 +17,18 @@ import java.io.InputStream;
 public class PhotoTakenInteractor implements IPhotoTakenUseCase {
     private final OCRService ocrService;
     private final Context context;
-    public PhotoTakenInteractor(OCRService ocrService, Context context) {
+    private final IScreenChangedListener listener;
+
+    public PhotoTakenInteractor(OCRService ocrService, Context context, IScreenChangedListener listener) {
         this.ocrService = ocrService;
         this.context = context;
+        this.listener = listener;
     }
 
     @Override
     public void submitPhoto(InputStream photo) {
          ReceivedData receivedData = ocrService.receiveImageData(photo);
-         ScreenRecognizer recognizer = new ScreenRecognizer(receivedData, new IScreenChangedListener() {
-             @Override
-             public void onScreenChanged(Screen screen) {
-                 ScreenRecognizer.appendLog("Changed Screens to: " + screen);
-             }
-         });
+         ScreenRecognizer recognizer = new ScreenRecognizer(receivedData, listener);
          ScreenRecognizer.appendLog("Screen Nr.:" + recognizer.recognize());
 
     }
